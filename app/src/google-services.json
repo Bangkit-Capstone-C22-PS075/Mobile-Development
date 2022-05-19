@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "869383304679",
+    "firebase_url": "https://d-jahit-default-rtdb.firebaseio.com",
+    "project_id": "d-jahit",
+    "storage_bucket": "d-jahit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869383304679:android:c5b3254950e4582b357942",
+        "android_client_info": {
+          "package_name": "com.jn.capstoneproject.d_jahit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869383304679-5hrcs3l43eh88mjdqs9a3or3d9av1691.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jn.capstoneproject.d_jahit",
+            "certificate_hash": "48d6ee68a6dceec7908ca366884b3193e4035d7d"
+          }
+        },
+        {
+          "client_id": "869383304679-0oq19eqmm40usq4j2k95jcm671boo9g8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKJWxQObtNVhS1mUMp8E2DPVeeMFMnMYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869383304679-0oq19eqmm40usq4j2k95jcm671boo9g8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
