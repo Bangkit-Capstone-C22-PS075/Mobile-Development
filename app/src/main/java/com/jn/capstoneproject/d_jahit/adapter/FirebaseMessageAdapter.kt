@@ -1,7 +1,6 @@
-package com.jn.capstoneproject.d_jahit.chat
+package com.jn.capstoneproject.d_jahit.adapter
 import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +9,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.jn.capstoneproject.d_jahit.R
 import com.jn.capstoneproject.d_jahit.databinding.ItemMessageBinding
+import com.jn.capstoneproject.d_jahit.model.Message
 
 class FirebaseMessageAdapter(
     options: FirebaseRecyclerOptions<Message>,
@@ -18,7 +18,7 @@ class FirebaseMessageAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_detail_chat, parent, false)
+        val view = inflater.inflate(R.layout.item_message, parent, false)
         val binding = ItemMessageBinding.bind(view)
         return MessageViewHolder(binding)
     }

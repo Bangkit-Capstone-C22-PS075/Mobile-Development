@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.D_Jahit">
         <activity
+            android:name=".ui.DetailChat"
+            android:exported="false" />
+        <activity
             android:name=".ui.ChatActivity"
             android:exported="false"
             android:label="@string/title_activity_chat"

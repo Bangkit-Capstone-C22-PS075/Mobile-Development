@@ -1,4 +1,4 @@
-package com.jn.capstoneproject.d_jahit.chat
+package com.jn.capstoneproject.d_jahit.model
 
 import com.google.firebase.database.IgnoreExtraProperties
 

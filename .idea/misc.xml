@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable-v24/ic_back.xml" value="0.2435" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable-v24/ic_baseline_settings_24.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/banner.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/buttom.xml" value="0.1" />
@@ -11,6 +12,7 @@
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/ic_rectangle_1.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/search.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_chat.xml" value="0.25" />
+        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_detail_chat.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_register.xml" value="0.25" />
@@ -23,7 +25,8 @@
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/item_chat.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/item_detail_chat.xml" value="0.25" />
-        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/item_message.xml" value="0.25" />
+        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/item_message.xml" value="0.264" />
+        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/item_message_right.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/item_pakaian.xml" value="0.264" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22592592592592592" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/menu/option_menu.xml" value="0.25" />
