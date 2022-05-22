@@ -1,31 +1,42 @@
-package com.jn.capstoneproject.d_jahit.ui
+package com.jn.capstoneproject.d_jahit.ui.fragment
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import com.jn.capstoneproject.d_jahit.databinding.ActivityLoginBinding
-import com.jn.capstoneproject.d_jahit.databinding.ActivityRegisterBinding
+import com.jn.capstoneproject.d_jahit.R
+import com.jn.capstoneproject.d_jahit.databinding.FragmentLoginBinding
+import com.jn.capstoneproject.d_jahit.databinding.FragmentRegisterBinding
+import com.jn.capstoneproject.d_jahit.ui.LoginActivity
 
-class RegisterActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRegisterBinding
+
+class RegisterFragment : Fragment() {
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentRegisterBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         auth = Firebase.auth
 
 
@@ -44,7 +55,7 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun registerUser(name: String,email: String,password: String){
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmailAndPassword:success")
@@ -56,18 +67,16 @@ class RegisterActivity : AppCompatActivity() {
                     hashMap.put("name",name)
                     hashMap.put("profileImage","")
 
-                    databaseReference.setValue(hashMap).addOnCompleteListener(this){
+                    databaseReference.setValue(hashMap).addOnCompleteListener(requireActivity()){
                         if (it.isSuccessful){
-                            val  intent= Intent(this,LoginActivity::class.java)
-                            startActivity(intent)
+                            findNavController().popBackStack()
                         }
                     }
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmailAndPassword:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    showToast("Authentication failed")
                     updateUI(null)
                 }
             }
@@ -76,12 +85,11 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null){
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            findNavController().popBackStack()
         }
     }
 
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
@@ -90,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
     private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
