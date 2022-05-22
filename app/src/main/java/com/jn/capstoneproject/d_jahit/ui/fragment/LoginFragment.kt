@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.fragment.findNavController
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -28,7 +29,6 @@ import com.google.firebase.ktx.Firebase
 import com.jn.capstoneproject.d_jahit.R
 import com.jn.capstoneproject.d_jahit.databinding.FragmentLoginBinding
 import com.jn.capstoneproject.d_jahit.ui.MainActivity
-import com.jn.capstoneproject.d_jahit.ui.RegisterActivity
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -113,8 +113,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun toSignup() {
-        val intent= Intent(requireActivity(), RegisterActivity::class.java)
-        startActivity(intent)
+        findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
 
     }
 
@@ -179,7 +178,8 @@ class LoginFragment : Fragment() {
 
     private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null){
-            startActivity(Intent(requireActivity(), MainActivity::class.java))
+           val intent= Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
 
         }
     }

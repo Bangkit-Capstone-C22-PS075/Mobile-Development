@@ -6,6 +6,11 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -26,11 +31,21 @@ class MainActivity : AppCompatActivity() {
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnChat.setOnClickListener {
-            val intent= Intent (this, ChatActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        binding.btnChat.setOnClickListener {
+//            val intent= Intent (this, ChatActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+//
+        val navController = findNavController(R.id.nav_host_fragment)
+//
+        val appBarConfiguration = AppBarConfiguration.Builder(
+            R.id.homeFragment, R.id.profileFragment
+        ).build()
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
