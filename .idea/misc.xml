@@ -6,11 +6,13 @@
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable-v24/ic_back.xml" value="0.2435" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable-v24/ic_baseline_settings_24.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/banner.xml" value="0.1" />
+        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/bg_circle.xml" value="0.2555" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/buttom.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/edit_text_shadow.xml" value="0.1775" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/ic_baseline_account.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/ic_rectangle_1.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/drawable/search.xml" value="0.1" />
+        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_camera.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_chat.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_detail_chat.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_login.xml" value="0.264" />
@@ -18,8 +20,9 @@
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_detail_produk.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_home.xml" value="0.264" />
-        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_login.xml" value="0.4" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_register.xml" value="0.1" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_second.xml" value="0.25" />
         <entry key="..\:/jundi/Dicoding/Android Fundamental/D_Jahit/app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />
