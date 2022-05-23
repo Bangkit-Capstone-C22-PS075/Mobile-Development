@@ -12,7 +12,27 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.jn.capstoneproject.d_jahit.ProfileFragment"
+        android:name="com.jn.capstoneproject.d_jahit.ui.fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.jn.capstoneproject.d_jahit.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.jn.capstoneproject.d_jahit.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/searcFragment"
+        android:name="com.jn.capstoneproject.d_jahit.SearcFragment"
+        android:label="fragment_searc"
+        tools:layout="@layout/fragment_search" />
 </navigation>

@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
+import java.util.*
 
 class PasswordEditText : AppCompatEditText, View.OnTouchListener {
 
@@ -84,6 +85,7 @@ class PasswordEditText : AppCompatEditText, View.OnTouchListener {
             val toggleButtonStart: Float
             val toggleButtonEnd: Float
             var isToggleButtonClicked = false
+
 
             if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
                 toggleButtonEnd = (hidePasswordIcon.intrinsicWidth + paddingStart).toFloat()

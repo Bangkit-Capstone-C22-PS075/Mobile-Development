@@ -5,15 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CameraActivity"
+    tools:context=".ui.activity.CameraActivity"
     tools:keep="@layout/activity_camera">
 
     <androidx.camera.view.PreviewView
         android:id="@+id/viewFinder"
+        android:background="@color/Main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn_back"
         android:layout_width="46dp"
         android:layout_height="46dp"
@@ -37,7 +38,7 @@
         android:background="@drawable/bg_circle"
         android:contentDescription="kamerae" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btn_switch_camera"
         android:layout_width="46dp"
         android:layout_height="46dp"

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
-
+    tools:context=".ui.fragment.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clheader"
@@ -13,41 +12,13 @@
         android:layout_height="130dp"
         android:background="@color/Main"
         app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/vector"
-            app:layout_constraintEnd_toStartOf="@id/cart"
-            app:layout_constraintTop_toTopOf="@id/cart" />
-
-        <ImageView
-            android:id="@+id/cart"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/cart"
-            app:layout_constraintEnd_toStartOf="@id/setting"
-            app:layout_constraintTop_toTopOf="@id/setting" />
-
-        <ImageView
-            android:id="@+id/setting"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="19dp"
-            android:src="@drawable/setting"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_profile"
             android:layout_width="48dp"
             android:layout_height="50dp"
             android:layout_marginStart="22dp"
             android:layout_marginTop="45dp"
+            android:src="@drawable/cs"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
@@ -116,6 +87,34 @@
             app:layout_constraintTop_toTopOf="@id/follower" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/vector"
+        app:layout_constraintEnd_toStartOf="@id/cart"
+        app:layout_constraintTop_toTopOf="@id/cart" />
+
+    <ImageView
+        android:id="@+id/cart"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/cart"
+        app:layout_constraintEnd_toStartOf="@id/setting"
+        app:layout_constraintTop_toTopOf="@id/setting" />
+
+    <ImageView
+        android:id="@+id/setting"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="19dp"
+        android:src="@drawable/setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/vline2"
@@ -374,17 +373,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_help_center" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

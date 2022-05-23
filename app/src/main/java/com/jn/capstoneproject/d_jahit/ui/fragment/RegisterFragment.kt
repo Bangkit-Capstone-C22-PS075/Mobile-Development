@@ -1,6 +1,5 @@
 package com.jn.capstoneproject.d_jahit.ui.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,10 +14,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import com.jn.capstoneproject.d_jahit.R
-import com.jn.capstoneproject.d_jahit.databinding.FragmentLoginBinding
 import com.jn.capstoneproject.d_jahit.databinding.FragmentRegisterBinding
-import com.jn.capstoneproject.d_jahit.ui.LoginActivity
 
 
 class RegisterFragment : Fragment() {

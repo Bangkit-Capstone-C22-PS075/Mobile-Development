@@ -1,4 +1,4 @@
-package com.jn.capstoneproject.d_jahit.ui
+package com.jn.capstoneproject.d_jahit.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

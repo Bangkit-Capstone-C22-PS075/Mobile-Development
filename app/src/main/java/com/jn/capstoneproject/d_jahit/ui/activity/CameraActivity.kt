@@ -1,4 +1,4 @@
-package com.jn.capstoneproject.d_jahit.ui
+package com.jn.capstoneproject.d_jahit.ui.activity
 
 import android.content.Intent
 import android.os.Build
@@ -14,7 +14,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.jn.capstoneproject.d_jahit.Constanta.CAMERA_X_RESULT
-import com.jn.capstoneproject.d_jahit.createFile
+import com.jn.capstoneproject.d_jahit.Utils
 import com.jn.capstoneproject.d_jahit.databinding.ActivityCameraBinding
 
 class CameraActivity : AppCompatActivity() {
@@ -46,7 +46,7 @@ class CameraActivity : AppCompatActivity() {
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
 
-        val photoFile = createFile(application)
+        val photoFile = Utils.createFile(application)
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         imageCapture!!.takePicture(outputOptions, ContextCompat.getMainExecutor(this), object : ImageCapture.OnImageSavedCallback {

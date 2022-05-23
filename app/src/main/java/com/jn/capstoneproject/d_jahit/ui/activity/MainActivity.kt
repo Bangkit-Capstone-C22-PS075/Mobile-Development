@@ -1,9 +1,10 @@
-package com.jn.capstoneproject.d_jahit.ui
+package com.jn.capstoneproject.d_jahit.ui.activity
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.findNavController
@@ -30,12 +31,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
-//        binding.btnChat.setOnClickListener {
-//            val intent= Intent (this, ChatActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
+
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 //
         val navController = findNavController(R.id.nav_host_fragment)
@@ -48,30 +46,12 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.option_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-
-            R.id.option -> {
-                toLogin()
-                true
-            }
 
 
-            else -> false
-        }
-    }
-
-    private fun toLogin() {
-        Firebase.auth.signOut()
-        val intent= Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
+    companion object {
+        const val CAMERA_X_RESULT = 200
+        val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        const val REQUEST_CODE_PERMISSIONS = 10
     }
 
 }
