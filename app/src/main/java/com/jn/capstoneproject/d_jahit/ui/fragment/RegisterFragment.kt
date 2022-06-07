@@ -1,20 +1,26 @@
 package com.jn.capstoneproject.d_jahit.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import com.jn.capstoneproject.d_jahit.ApiCallbackString
+import com.jn.capstoneproject.d_jahit.ViewModelFactory
 import com.jn.capstoneproject.d_jahit.databinding.FragmentRegisterBinding
+import com.jn.capstoneproject.d_jahit.ui.activity.MainActivity
+import com.jn.capstoneproject.d_jahit.viewmodel.RegisterViewModel
 
 
 class RegisterFragment : Fragment() {
@@ -22,11 +28,14 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
+    private val viewModel: RegisterViewModel by viewModels {
+        ViewModelFactory(requireActivity())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRegisterBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -34,40 +43,51 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         auth = Firebase.auth
-
-
-        val confirmPassword= binding.edtConfirmPassword.toString()
-        val name=binding.edtName.text.toString()
-
+        setupViewModel()
         binding.btnRegister.setOnClickListener {
 
             val email = binding.edtUsername.text.toString()
-            val password= binding.edtPassword.text.toString()
-            val confirmPassword= binding.edtConfirmPassword.toString()
-            val name=binding.edtName.text.toString()
-            registerUser(name,email,password)
-        }
+            val password = binding.edtPassword.text.toString()
+            val confirmPassword = binding.edtConfirmPassword.text.toString()
+            val name = binding.edtName.text.toString()
+            if (email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty()) {
+                showToast("field tidak boleh ada yg kosong")
+            } else if (password != confirmPassword) {
+                showToast("Password tidak sama")
+            } else {
+                registerUser(name, email, password)
+                viewModel.registerUser(name, email, password, object : ApiCallbackString {
+                    override fun onResponse(success: Boolean, message: String) {
+                        onSuccess(success, message)
 
+                    }
+                })
+
+            }
+        }
     }
-    private fun registerUser(name: String,email: String,password: String){
+    private fun setupViewModel() {
+        viewModel.isLoading.observe(requireActivity()) { showLoading(it) }
+    }
+    private fun registerUser(name: String, email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmailAndPassword:success")
                     val user = auth.currentUser
-                    val userid= user!!.uid
-                    databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userid)
-                    val hashMap:HashMap<String,String> = HashMap()
-                    hashMap.put("userId",userid)
-                    hashMap.put("name",name)
-                    hashMap.put("profileImage","")
+                    val userid = user!!.uid
+//                    val request = UserProfileChangeRequest.Builder()
+//                        .displayName(name)
+//                        .build()
+                    databaseReference =
+                        FirebaseDatabase.getInstance().getReference("Users").child(userid)
+                    val hashMap: HashMap<String, String> = HashMap()
+                    hashMap["userId"] = userid
+                    hashMap["name"] = name
+                    hashMap["profileImage"] = ""
 
-                    databaseReference.setValue(hashMap).addOnCompleteListener(requireActivity()){
-                        if (it.isSuccessful){
-                            findNavController().popBackStack()
-                        }
-                    }
+                    databaseReference.setValue(hashMap).addOnCompleteListener(requireActivity()){}
+
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -76,12 +96,27 @@ class RegisterFragment : Fragment() {
                     updateUI(null)
                 }
             }
+    }
 
+    private fun onSuccess(param: Boolean, message: String) {
+        if (param) {
+            showToast(message)
+            showLoading(false)
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
+        } else {
+            showToast(message)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
-        if (currentUser != null){
-            findNavController().popBackStack()
+        if (currentUser != null) {
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -89,10 +124,11 @@ class RegisterFragment : Fragment() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        if(currentUser != null){
-            updateUI(currentUser);
+        if (currentUser != null) {
+            updateUI(currentUser)
         }
     }
+
     private fun showToast(message: String) {
         Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
