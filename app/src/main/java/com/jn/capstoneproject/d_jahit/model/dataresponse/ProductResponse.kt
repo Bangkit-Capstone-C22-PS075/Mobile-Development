@@ -1,6 +1,8 @@
 package com.jn.capstoneproject.d_jahit.model.dataresponse
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class ProductResponse(
 
@@ -11,6 +13,8 @@ data class ProductResponse(
 	val products: List<ProductsItem>
 )
 
+
+@Parcelize
 data class ProductsItem(
 
 	@field:SerializedName("insertedAt")
@@ -22,6 +26,12 @@ data class ProductsItem(
 	@field:SerializedName("definition")
 	val definition: String,
 
+	@field:SerializedName("price1")
+	val price1: Double,
+
+	@field:SerializedName("price2")
+	val price2: Double,
+
 	@field:SerializedName("id")
 	val id: String
-)
+): Parcelable

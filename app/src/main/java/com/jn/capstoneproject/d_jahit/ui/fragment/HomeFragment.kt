@@ -15,10 +15,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jn.capstoneproject.d_jahit.ApiCallbackString
 import com.jn.capstoneproject.d_jahit.Constanta.CAMERA_X_RESULT
 import com.jn.capstoneproject.d_jahit.Constanta.REQUEST_CODE_PERMISSIONS
 import com.jn.capstoneproject.d_jahit.Constanta.REQUIRED_PERMISSIONS
@@ -27,9 +27,7 @@ import com.jn.capstoneproject.d_jahit.Utils
 import com.jn.capstoneproject.d_jahit.ViewModelFactory
 import com.jn.capstoneproject.d_jahit.adapter.ListProductAdapter
 import com.jn.capstoneproject.d_jahit.databinding.FragmentHomeBinding
-import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductResponse
 import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductsItem
-import com.jn.capstoneproject.d_jahit.model.dataresponse.UserResponse
 import com.jn.capstoneproject.d_jahit.ui.activity.CameraActivity
 import com.jn.capstoneproject.d_jahit.ui.activity.DetailChat
 import com.jn.capstoneproject.d_jahit.viewmodel.HomeViewModel
@@ -45,11 +43,10 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var sessionManager: SessionManager
-    private lateinit var productAdapter:ListProductAdapter
+    private lateinit var productAdapter: ListProductAdapter
     private val viewModel: HomeViewModel by viewModels {
         ViewModelFactory(requireActivity())
     }
-
     private var currentFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +58,7 @@ class HomeFragment : Fragment() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
-        productAdapter= ListProductAdapter()
+        productAdapter = ListProductAdapter()
     }
 
     override fun onCreateView(
@@ -81,56 +78,52 @@ class HomeFragment : Fragment() {
             startCameraX()
         }
         sessionManager = SessionManager(requireActivity())
-        productAdapter= ListProductAdapter()
+        productAdapter = ListProductAdapter()
         val userId = sessionManager.fetchAccessId()
         if (userId != null) {
 //            binding.tvid.text = token
-            binding.tvid.visibility=View.INVISIBLE
+            binding.tvid.visibility = View.INVISIBLE
 
-        binding.rvProduct.apply {
-            adapter=productAdapter
-            setHasFixedSize(true)
-            layoutManager=LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
-        }
-        viewModel.getAllProduct()
-            viewModel.getProduct.observe(requireActivity()){ listProduct ->
-                showData(listProduct)
-//                binding.tvid.visibility=View.VISIBLE
-//                binding.rvProduct.adapter=productAdapter
-//                binding.rvProduct.layoutManager=LinearLayoutManager(requireActivity().)
+            binding.rvProduct.apply {
+                adapter = productAdapter
+                setHasFixedSize(true)
+                layoutManager =
+                    LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
             }
-//            viewModel.getAllUser(object :ApiCallbackString{
-//                override fun onResponse(success: Boolean, message: String) {
-//                    onSuccess(success,message)
-//                }
-//            })
-//            viewModel.getallUser.observe(requireActivity()){ listProduct ->
-//                showData(listProduct)
-//                binding.tvid.visibility=View.VISIBLE
-//                binding.rvProduct.adapter=productAdapter
-//                binding.rvProduct.layoutManager=LinearLayoutManager(requireActivity().)
-//            }
+            viewModel.getAllProduct()
+            viewModel.getProduct.observe(requireActivity()) { listProduct ->
+                showData(listProduct)
+            }
+
             binding.btnChat.setOnClickListener {
                 val intent = Intent(requireActivity(), DetailChat::class.java)
                 startActivity(intent)
             }
 
 
-
+            productAdapter.setOnItemClickCallback(object : ListProductAdapter.OnItemClickCallback {
+                    override fun onItemClicked(story: ProductsItem) {
+                        findNavController().navigate(
+                            HomeFragmentDirections.actionHomeFragmentToDetailProductFragment(
+                                story
+                            )
+                        )
+                    }
+                })
+            }
 
 
         }
 
-    }
+
 
     private fun onSuccess(params: Boolean, message: String) {
-        if (params){
-            Toast.makeText(requireActivity(),"Berhasil", Toast.LENGTH_SHORT).show()
-            binding.tvid.visibility=View.VISIBLE
-        }
-        else{
-            Toast.makeText(requireActivity(),"Berhasil", Toast.LENGTH_SHORT).show()
-            binding.tvid.visibility=View.VISIBLE
+        if (params) {
+            Toast.makeText(requireActivity(), "Berhasil", Toast.LENGTH_SHORT).show()
+            binding.tvid.visibility = View.VISIBLE
+        } else {
+            Toast.makeText(requireActivity(), "Berhasil", Toast.LENGTH_SHORT).show()
+            binding.tvid.visibility = View.VISIBLE
 
         }
 
@@ -139,9 +132,8 @@ class HomeFragment : Fragment() {
     private fun showData(data: List<ProductsItem>) {
 
 
-
         binding.rvProduct.apply {
-           setHasFixedSize(true)
+            setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireActivity(), 2)
 
         }

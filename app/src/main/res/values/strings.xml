@@ -25,7 +25,6 @@
     <string name="send_error">Gagal terkirim</string>
 
 
-
     <string name="password_less_than_6">Password must at least 6 characters!</string>
 </resources>
 

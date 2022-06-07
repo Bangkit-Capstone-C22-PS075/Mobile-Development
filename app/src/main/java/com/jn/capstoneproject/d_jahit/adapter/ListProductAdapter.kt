@@ -6,14 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jn.capstoneproject.d_jahit.DiffCallback
 import com.jn.capstoneproject.d_jahit.databinding.ItemPakaianBinding
-import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductResponse
 import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductsItem
-import com.jn.capstoneproject.d_jahit.model.dataresponse.UserResponse
-import java.util.ArrayList
 
 class ListProductAdapter: RecyclerView.Adapter<ListProductAdapter.ListViewHolder>() {
    private val listProduct=ArrayList<ProductsItem>()
-
+    private lateinit var onItemClickCallback: OnItemClickCallback
     fun setAllData(data: List<ProductsItem>) {
         val diffCallback = DiffCallback(this.listProduct, data)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -22,11 +19,22 @@ class ListProductAdapter: RecyclerView.Adapter<ListProductAdapter.ListViewHolder
         this.listProduct.addAll(data)
         diffResult.dispatchUpdatesTo(this)
     }
-    inner class ListViewHolder(private val binding: ItemPakaianBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: ProductsItem){
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+
+
+    inner class ListViewHolder(private val binding: ItemPakaianBinding):
+        RecyclerView.ViewHolder(binding.root){
+        fun bind(data: ProductsItem) {
             binding.apply {
-                tvNameProduk.text= data.name
-                tvDescription.text=data.definition
+                tvNameProduk.text = data.name
+                tvDescription.text = data.definition
+            }
+////
+           itemView.setOnClickListener {
+                onItemClickCallback.onItemClicked(data)
             }
         }
     }
@@ -43,6 +51,11 @@ class ListProductAdapter: RecyclerView.Adapter<ListProductAdapter.ListViewHolder
     }
 
     override fun getItemCount(): Int = listProduct.size
+    interface OnItemClickCallback {
+        fun onItemClicked(data: ProductsItem) {
+        }
 
+
+    }
 
 }

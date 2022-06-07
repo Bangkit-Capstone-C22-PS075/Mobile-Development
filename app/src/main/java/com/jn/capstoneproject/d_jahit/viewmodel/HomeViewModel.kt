@@ -1,22 +1,35 @@
 package com.jn.capstoneproject.d_jahit.viewmodel
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.jn.capstoneproject.d_jahit.api.ApiConfig
+import com.jn.capstoneproject.d_jahit.database.RepositoryDatabase
+import com.jn.capstoneproject.d_jahit.database.history.HistoryDao
+import com.jn.capstoneproject.d_jahit.database.history.HistoryDatabase
+import com.jn.capstoneproject.d_jahit.database.history.ProductModel
 import com.jn.capstoneproject.d_jahit.model.Repository
 import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductResponse
 import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductsItem
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import org.json.JSONTokener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel(private val repository: Repository) : ViewModel() {
+class HomeViewModel(private val repository: Repository)  : ViewModel()  {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = repository.isLoading
+//
+//    private val repositoryDatabase =RepositoryDatabase(application)
+//    private val dao:HistoryDao
+//    private val product= MutableLiveData<ProductModel>()
+//    init {
+//        val database: HistoryDatabase = HistoryDatabase.getInstance(application)
+//        dao= database.historyDao()
+//
+//    }
 
     //    val getProduct: LiveData<List<ProductResponse>> =repository.getProduct
 //    val getallUser: LiveData<List<UserResponse>> =repository.getallUser
@@ -61,6 +74,18 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
             }
         })
     }
+//
+//    fun insertHistoryProduct(history: ProductModel) = viewModelScope.launch {
+//        repositoryDatabase.insertHistory(history)
+//    }
+//
+//    fun deleteHistoryProduct(history: ProductModel) = viewModelScope.launch {
+//        repositoryDatabase.deleteHistory(history)
+//    }
+//
+//    fun getHistoryProduct(): LiveData<ProductModel>{
+//        return product
+//    }
 
     companion object {
         const val TAG = "API"
