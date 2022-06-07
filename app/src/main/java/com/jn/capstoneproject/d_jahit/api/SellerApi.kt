@@ -1,30 +1,54 @@
 package com.jn.capstoneproject.d_jahit.api
 
 import com.jn.capstoneproject.d_jahit.model.dataresponse.SellerResponse
-import com.jn.capstoneproject.d_jahit.model.dataresponse.UserResponse
-import retrofit2.Response
+import com.jn.capstoneproject.d_jahit.model.dataresponse.StatusResponse
+import retrofit2.Call
 import retrofit2.http.*
 
 interface SellerApi {
     @FormUrlEncoded
-    @POST("addSeller")
-    suspend fun login(
-//        @Field("fullName") id: String,
-//        @Field("username") password: String,
-//        @Field("password") email: String,
+    @POST("seller")
+    fun createSeller(
+        @Field("shopName") shopName: String,
+        @Field("province") province: String,
+        @Field("city") city: String,
+        @Field("streetName") streetName: String,
+        @Field("detailStreet") detailStreet: String,
+        @Field("sellerName") sellerName: String,
+        @Field("phoneNumber") phoneNumber: String,
 //        @Field("gender") password: String
-    ):Response<UserResponse>
+    ): Call<StatusResponse>
 
-    @GET("getAllSeller/")
-    suspend fun getAllSeller():Response<SellerResponse>
+    @GET("seller/")
+    fun getAllSeller(
+        @Path("id")
+        id: String
+    ): Call<SellerResponse>
 
-    @GET("getSellerById")
-    suspend fun getSellerById():Response<SellerResponse>
+    @GET("seller/{id}")
+    fun getSellerById(
+        @Path("id")
+        id: String
+    ): Call<SellerResponse>
 
-    @PUT("editSellerById")
-    suspend fun editSellerById():Response<SellerResponse>
+    @FormUrlEncoded
+    @PUT("seller{id}")
+    fun editSellerById(
+        @Path("id")
+        id: String,
+        @Field("shopName") shopName: String,
+        @Field("province") province: String,
+        @Field("city") city: String,
+        @Field("streetName") streetName: String,
+        @Field("detailStreet") detailStreet: String,
+        @Field("sellerName") sellerName: String,
+        @Field("phoneNumber") phoneNumber: String,
+    ): Call<SellerResponse>
 
-    @DELETE("deleteSellerByIDd")
-    suspend fun deleteSellerByIDd():Response<SellerResponse>
+    @DELETE("seller{id}")
+    fun deleteSellerById(
+        @Path("id")
+        id: String
+    ): Call<SellerResponse>
 
 }
