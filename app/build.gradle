@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'com.google.gms.google-services'
 }
 
@@ -27,6 +26,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_API_URL", "\"http://localhost:3000/\""
         }
     }
     compileOptions {
@@ -40,6 +40,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        mlModelBinding true
     }
     testOptions {
         animationsDisabled = true
@@ -54,9 +55,13 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
     implementation 'com.firebaseui:firebase-ui-database:8.0.0'
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.google.firebase:firebase-storage-ktx:20.0.1'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
 
+
+    //ML
+    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
+    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
     // Room
     def room_version = "2.4.2"
     implementation "androidx.room:room-runtime:$room_version"
@@ -108,12 +113,6 @@ dependencies {
     // Lottie
     def lottieVersion = "5.0.3"
     implementation "com.airbnb.android:lottie:$lottieVersion"
-
-
-
-    // Web Server Mock
-    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
-    androidTestImplementation "com.squareup.okhttp3:okhttp-tls:4.9.3"
 
     // Others
     implementation 'androidx.core:core-ktx:1.7.0'
