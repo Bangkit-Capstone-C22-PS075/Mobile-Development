@@ -21,6 +21,9 @@
     <string name="content_tab_home">Welcome Home</string>
     <string name="content_tab_profile">Change your Profile here</string>
     <string name="content_tab_text">This is Tab %1$d</string>
+    <string name="send_success">Berhasil terkirim</string>
+    <string name="send_error">Gagal terkirim</string>
+
 
 
     <string name="password_less_than_6">Password must at least 6 characters!</string>
