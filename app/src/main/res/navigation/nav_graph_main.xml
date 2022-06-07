@@ -18,21 +18,34 @@
         <action
             android:id="@+id/action_profileFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_createStroreFragment"
+            app:destination="@id/createStroreFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.jn.capstoneproject.d_jahit.HistoryFragment"
+        android:name="com.jn.capstoneproject.d_jahit.ui.fragment.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.jn.capstoneproject.d_jahit.UserFragment"
+        android:name="com.jn.capstoneproject.d_jahit.ui.fragment.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/searcFragment"
-        android:name="com.jn.capstoneproject.d_jahit.SearcFragment"
+        android:name="com.jn.capstoneproject.d_jahit.ui.fragment.SearcFragment"
         android:label="fragment_searc"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.jn.capstoneproject.d_jahit.ui.fragment.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/createStroreFragment"
+        android:name="com.jn.capstoneproject.d_jahit.ui.fragment.CreateSellerFragment"
+        android:label="fragment_create_strore"
+        tools:layout="@layout/fragment_create_seller" />
 </navigation>
