@@ -16,11 +16,12 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
+private val timeStamp: String = SimpleDateFormat(
+    FILENAME_FORMAT,
+    Locale.US
+).format(System.currentTimeMillis())
 object Utils {
-    private val timeStamp: String = SimpleDateFormat(
-        FILENAME_FORMAT,
-        Locale.US
-    ).format(System.currentTimeMillis())
+
 
     fun createTempFile(context: Context): File {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
@@ -101,15 +102,16 @@ object Utils {
         return file
     }
 
-    interface ApiCallbackString {
-        fun onResponse(success: Boolean, message: String)
-    }
+
 
 }
+interface ApiCallbackString {
+    fun onResponse(success: Boolean, message: String)
+}
 
-//fun String.withDateFormat(): String {
-//    val dateTime: ZonedDateTime = OffsetDateTime.parse(this).toZonedDateTime()
-//    val formatter = DateTimeFormatter.ofPattern("MMM dd, HH:mm")
-//    return dateTime.format(formatter)
-//}
+fun String.withDateFormat(): String {
+    val dateTime: ZonedDateTime = OffsetDateTime.parse(this).toZonedDateTime()
+    val formatter = DateTimeFormatter.ofPattern("MMM dd, HH:mm")
+    return dateTime.format(formatter)
+}
 
