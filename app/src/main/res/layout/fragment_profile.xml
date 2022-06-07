@@ -150,37 +150,37 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="54dp"
-            android:layout_height="51dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="28dp"
             android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_payments"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:src="@drawable/ic_baseline_payments" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="54dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="44dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="50dp"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toTopOf="@+id/imageView3"
             android:src="@drawable/rating" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="54dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="50dp"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/imageView"
             android:src="@drawable/kemas" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="54dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="44dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="50dp"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2"
             android:src="@drawable/kirim"/>
@@ -264,6 +264,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_create_store"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -364,6 +365,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_costumer_service" />
 
     <Button
+        android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
