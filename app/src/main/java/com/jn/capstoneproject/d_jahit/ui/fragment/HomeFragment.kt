@@ -4,32 +4,51 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.jn.capstoneproject.d_jahit.ApiCallbackString
+import com.jn.capstoneproject.d_jahit.Constanta.CAMERA_X_RESULT
+import com.jn.capstoneproject.d_jahit.Constanta.REQUEST_CODE_PERMISSIONS
 import com.jn.capstoneproject.d_jahit.Constanta.REQUIRED_PERMISSIONS
+import com.jn.capstoneproject.d_jahit.SessionManager
+import com.jn.capstoneproject.d_jahit.Utils
+import com.jn.capstoneproject.d_jahit.ViewModelFactory
+import com.jn.capstoneproject.d_jahit.adapter.ListProductAdapter
 import com.jn.capstoneproject.d_jahit.databinding.FragmentHomeBinding
+import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductResponse
+import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductsItem
+import com.jn.capstoneproject.d_jahit.model.dataresponse.UserResponse
 import com.jn.capstoneproject.d_jahit.ui.activity.CameraActivity
-import com.jn.capstoneproject.d_jahit.ui.activity.MainActivity
+import com.jn.capstoneproject.d_jahit.ui.activity.DetailChat
+import com.jn.capstoneproject.d_jahit.viewmodel.HomeViewModel
+import com.jn.capstoneproject.d_jahit.viewmodel.LoginViewModel
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
-import com.jn.capstoneproject.d_jahit.Utils
 
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var sessionManager: SessionManager
+    private lateinit var productAdapter:ListProductAdapter
+    private val viewModel: HomeViewModel by viewModels {
+        ViewModelFactory(requireActivity())
+    }
 
     private var currentFile: File? = null
 
@@ -38,10 +57,11 @@ class HomeFragment : Fragment() {
         if (!checkAllPermissionsGranted()) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
-                MainActivity.REQUIRED_PERMISSIONS,
-                MainActivity.REQUEST_CODE_PERMISSIONS
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
             )
         }
+        productAdapter= ListProductAdapter()
     }
 
     override fun onCreateView(
@@ -49,7 +69,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding= FragmentHomeBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -60,8 +80,76 @@ class HomeFragment : Fragment() {
         binding.btnSearch.setOnClickListener {
             startCameraX()
         }
+        sessionManager = SessionManager(requireActivity())
+        productAdapter= ListProductAdapter()
+        val userId = sessionManager.fetchAccessId()
+        if (userId != null) {
+//            binding.tvid.text = token
+            binding.tvid.visibility=View.INVISIBLE
+
+        binding.rvProduct.apply {
+            adapter=productAdapter
+            setHasFixedSize(true)
+            layoutManager=LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL,false)
+        }
+        viewModel.getAllProduct()
+            viewModel.getProduct.observe(requireActivity()){ listProduct ->
+                showData(listProduct)
+//                binding.tvid.visibility=View.VISIBLE
+//                binding.rvProduct.adapter=productAdapter
+//                binding.rvProduct.layoutManager=LinearLayoutManager(requireActivity().)
+            }
+//            viewModel.getAllUser(object :ApiCallbackString{
+//                override fun onResponse(success: Boolean, message: String) {
+//                    onSuccess(success,message)
+//                }
+//            })
+//            viewModel.getallUser.observe(requireActivity()){ listProduct ->
+//                showData(listProduct)
+//                binding.tvid.visibility=View.VISIBLE
+//                binding.rvProduct.adapter=productAdapter
+//                binding.rvProduct.layoutManager=LinearLayoutManager(requireActivity().)
+//            }
+            binding.btnChat.setOnClickListener {
+                val intent = Intent(requireActivity(), DetailChat::class.java)
+                startActivity(intent)
+            }
+
+
+
+
+
+        }
+
     }
-    private fun checkAllPermissionsGranted() = MainActivity.REQUIRED_PERMISSIONS.all {
+
+    private fun onSuccess(params: Boolean, message: String) {
+        if (params){
+            Toast.makeText(requireActivity(),"Berhasil", Toast.LENGTH_SHORT).show()
+            binding.tvid.visibility=View.VISIBLE
+        }
+        else{
+            Toast.makeText(requireActivity(),"Berhasil", Toast.LENGTH_SHORT).show()
+            binding.tvid.visibility=View.VISIBLE
+
+        }
+
+    }
+
+    private fun showData(data: List<ProductsItem>) {
+
+
+
+        binding.rvProduct.apply {
+           setHasFixedSize(true)
+            layoutManager = GridLayoutManager(requireActivity(), 2)
+
+        }
+        productAdapter.setAllData(data)
+
+    }
+
+    private fun checkAllPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             requireActivity().baseContext,
             it
@@ -75,7 +163,7 @@ class HomeFragment : Fragment() {
     private val launcherIntentCameraX = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
-        if (it.resultCode == MainActivity.CAMERA_X_RESULT) {
+        if (it.resultCode == CAMERA_X_RESULT) {
             val myFile = it.data?.getSerializableExtra("picture") as File
             val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
             val result = Utils.rotateBitmap(BitmapFactory.decodeFile(myFile.path), isBackCamera)
