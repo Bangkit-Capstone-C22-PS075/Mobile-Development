@@ -8,11 +8,11 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginTop="66dp"
         android:layout_margin="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/d_jahit_logo"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
     <TextView
@@ -53,12 +53,12 @@
     app:layout_constraintEnd_toEndOf="@+id/logo"
     android:layout_marginTop="12dp"
     >
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edt_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        />
+        android:hint="Email" />
 </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtpass"
@@ -130,6 +130,15 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_register"
         app:layout_constraintStart_toEndOf="@+id/tvdontaccount"/>
 
-
+<ProgressBar
+    android:id="@+id/progressBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:visibility="invisible"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
