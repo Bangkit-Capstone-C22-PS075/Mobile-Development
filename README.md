@@ -13,4 +13,4 @@ Step
 7. Memgintegrasikan android dengan model tensorflow lite 
 9. melalakukan Testing
 
-link desig figma https://www.figma.com/file/avZ9iaIHM1PIazhnlVeLNY/Aplikasi-D-jahit?node-id=0%3A1
+link design figma https://www.figma.com/file/avZ9iaIHM1PIazhnlVeLNY/Aplikasi-D-jahit?node-id=0%3A1
