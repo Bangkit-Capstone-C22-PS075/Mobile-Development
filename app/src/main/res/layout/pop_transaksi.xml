@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/img_product"
+        android:src="@drawable/ic_place_holder"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_nama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="NamaProduct"
+        app:layout_constraintStart_toEndOf="@id/img_product"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Defination"
+        app:layout_constraintTop_toBottomOf="@id/tv_nama"
+        app:layout_constraintStart_toStartOf="@id/tv_nama"/>
+    <ImageButton
+        android:id="@+id/img_plus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:src="@drawable/ic_baseline_navigate_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintTop_toBottomOf="@id/img_product"/>
+<EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="0"
+    android:id="@+id/edt_jml"
+    android:textColor="@color/black"
+    android:background="@color/white"
+    android:textSize="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="4dp"
+    app:layout_constraintTop_toTopOf="@id/img_plus"
+    app:layout_constraintEnd_toStartOf="@id/img_plus"
+    />
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/img_minus"
+        android:background="@color/white"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/ic_baseline_navigate_next"
+        app:layout_constraintTop_toTopOf="@id/img_plus"
+        app:layout_constraintEnd_toStartOf="@id/edt_jml"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pesan"
+        android:id="@+id/btn_pesan"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_jml"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

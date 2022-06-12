@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,7 @@ import com.jn.capstoneproject.d_jahit.ViewModelFactory
 import com.jn.capstoneproject.d_jahit.databinding.FragmentUserBinding
 import com.jn.capstoneproject.d_jahit.model.dataresponse.UserResponse
 import com.jn.capstoneproject.d_jahit.viewmodel.ProfileViewModel
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.*
 
 
@@ -32,6 +34,7 @@ class UserFragment : Fragment() {
     private lateinit var sessionManager: SessionManager
     private var _binding: FragmentUserBinding? = null
     private val binding get() = _binding!!
+    private var password=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,21 +106,18 @@ class UserFragment : Fragment() {
             btnBack.setOnClickListener {
                 findNavController().popBackStack()
             }
-            btnSave.setOnClickListener {
-                if (id != null){
-                    val name=tvName.text.toString()
-                    val username=tvUsername.text.toString()
-                    val gender=tvGender.text.toString()
-                    val dateOfBirh=tvDateofbirh.text.toString()
-                    val phoneNumber=tvPhoneNumber.text.toString()
-                    val email=tvEmail.text.toString()
-                    viewModel.updateUser(id,name,username,gender,dateOfBirh,phoneNumber,email)
-                }
-            }
+
         }
 
 
         }
+
+    private fun onSucces(success: Boolean, message: String) {
+        if(success){
+            Toast.makeText(requireActivity(),message,Toast.LENGTH_SHORT).show()
+        }
+        else{Toast.makeText(requireActivity(),message,Toast.LENGTH_SHORT).show()}
+    }
 
     private fun showAlerdDialogEmail() {
         val builder= AlertDialog.Builder(requireActivity())
@@ -186,12 +186,36 @@ class UserFragment : Fragment() {
 
     private fun setUser(user: UserResponse?) {
         binding.apply {
+            val id=user?.id
+            val password=user?.password?.trim()
             tvName.text= user?.fullName
             tvUsername.text=user?.username
             tvEmail.text=user?.email
             tvGender.text=user?.gender
             tvPhoneNumber.text=user?.phoneNumber
             tvDateofbirh.text=user?.dateOfBirth
+            btnSave.setOnClickListener {
+                if (id != null){
+                    val name=tvName.text.toString().trim()
+                    val username=tvUsername.text.toString().trim()
+                    val gender=tvGender.text.toString().trim()
+                    val dateOfBirh=tvDateofbirh.text.toString().trim()
+                    val phoneNumber=tvPhoneNumber.text.toString().trim()
+                    val email=tvEmail.text.toString().trim()
+                    val bodyname=name.toRequestBody()
+                    val bodyusername=username.toRequestBody()
+                    val bodypass=password!!.toRequestBody()
+                    val bodygender=gender.toRequestBody()
+                    val bodytgl=dateOfBirh.toRequestBody()
+                    val bodynumber=phoneNumber.toRequestBody()
+                    val bodyemail=email.toRequestBody()
+                    viewModel.updateUser(id,name,username,password,gender,dateOfBirh,phoneNumber,email,object :ApiCallbackString{
+                        override fun onResponse(success: Boolean, message: String) {
+                            onSucces(success,message)
+                        }
+                    })
+                }
+            }
         }
     }
 }

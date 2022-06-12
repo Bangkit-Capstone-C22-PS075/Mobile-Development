@@ -1,23 +1,27 @@
 package com.jn.capstoneproject.d_jahit.api
 
-import com.jn.capstoneproject.d_jahit.model.dataresponse.SellerResponse
-import com.jn.capstoneproject.d_jahit.model.dataresponse.StatusResponse
+import com.jn.capstoneproject.d_jahit.model.dataresponse.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface SellerApi {
-    @FormUrlEncoded
+    @Multipart
     @POST("seller")
     fun createSeller(
-        @Field("shopName") shopName: String,
-        @Field("province") province: String,
-        @Field("city") city: String,
-        @Field("streetName") streetName: String,
-        @Field("detailStreet") detailStreet: String,
-        @Field("sellerName") sellerName: String,
-        @Field("phoneNumber") phoneNumber: String,
-//        @Field("gender") password: String
-    ): Call<StatusResponse>
+        @Part("userId") userId:RequestBody,
+        @Part("shopName") shopName: RequestBody,
+        @Part sellerPhoto: MultipartBody.Part,
+        @Part("province") province: RequestBody,
+        @Part("city") city: RequestBody,
+        @Part("streetName") streetName: RequestBody,
+        @Part("detailStreet") detailStreet: RequestBody,
+        @Part("sellerName") sellerName: RequestBody,
+        @Part("phoneNumber}") phoneNumber: RequestBody,
+        @Part("latitude") latitude: Double,
+        @Part("longitude}") longitude: Double,
+    ): Call<StatusSellerResponse>
 
     @GET("seller/")
     fun getAllSeller(
@@ -29,20 +33,23 @@ interface SellerApi {
     fun getSellerById(
         @Path("id")
         id: String
-    ): Call<SellerResponse>
+    ): Call<SellersItem>
 
-    @FormUrlEncoded
-    @PUT("seller{id}")
+    @Multipart
+    @PUT("seller/{id}")
     fun editSellerById(
-        @Path("id")
-        id: String,
-        @Field("shopName") shopName: String,
-        @Field("province") province: String,
-        @Field("city") city: String,
-        @Field("streetName") streetName: String,
-        @Field("detailStreet") detailStreet: String,
-        @Field("sellerName") sellerName: String,
-        @Field("phoneNumber") phoneNumber: String,
+        @Path("id")id: String,
+        @Part("userId") userId:RequestBody,
+        @Part("shopName") shopName: RequestBody,
+        @Part sellerPhoto: MultipartBody.Part,
+        @Part("province") province: RequestBody,
+        @Part("city") city: RequestBody,
+        @Part("streetName") streetName: RequestBody,
+        @Part("detailStreet") detailStreet: RequestBody,
+        @Part("sellerName") sellerName: RequestBody,
+        @Part("phoneNumber}") phoneNumber: RequestBody,
+        @Part("latitude") latitude: Double,
+        @Part("longitude}") longitude: Double,
     ): Call<SellerResponse>
 
     @DELETE("seller{id}")

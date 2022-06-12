@@ -10,7 +10,7 @@ class RegisterViewModel(private val repository: Repository) : ViewModel() {
 
     val isLoading: LiveData<Boolean> = repository.isLoading
 
-     fun registerUser(name: String, email: String, password: String, callback: ApiCallbackString) {
-        repository.createUser(name, email, password, callback)
+     fun registerUser(name: String,username: String, email: String, password: String, callback: ApiCallbackString) {
+        repository.createUser(name,username, email, password, callback)
     }
 }

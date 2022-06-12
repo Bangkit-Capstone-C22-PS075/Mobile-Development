@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="170dp"
         android:src="@drawable/banner"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,13 +23,14 @@
         android:layout_marginStart="19dp"
         android:layout_marginTop="19dp"
         android:layout_marginEnd="20dp"
+        android:id="@+id/search"
         android:background="@drawable/search"
         app:layout_constraintEnd_toStartOf="@+id/btn_cart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/search"
+            android:id="@+id/img_search"
             android:layout_width="25dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_baseline_search_24"
@@ -80,20 +81,155 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:layout_marginTop="16dp"
+        android:id="@+id/txtmau"
         android:text="Mau Buat Apa Hari Ini"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/banner" />
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/txtmau"
+        app:layout_constraintBottom_toTopOf="@id/vline"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="20dp"
+                android:id="@+id/tv_jackect"
+                android:textAlignment="center"
+                android:drawableTop="@drawable/jacket"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Jackect"
+                />
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:id="@+id/tv_shirt"
+                android:textAlignment="center"
+                android:drawableTop="@drawable/t_shirt"
+                android:layout_marginStart="22dp"
+                android:text="T-Shirt"
+                app:layout_constraintTop_toTopOf="@id/tv_jackect"
+                app:layout_constraintStart_toEndOf="@id/tv_jackect"
+                />
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:id="@+id/tv_kebaya"
+                android:textAlignment="center"
+                android:drawableTop="@drawable/kebaya"
+                android:text="Kebaya"
+                android:layout_marginStart="22dp"
+                app:layout_constraintTop_toTopOf="@id/tv_shirt"
+                app:layout_constraintStart_toEndOf="@id/tv_shirt"
+                />
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:id="@+id/tv_vest"
+                android:text="Vest"
+                android:drawableTop="@drawable/vest"
+                android:textAlignment="center"
+                android:layout_marginStart="22dp"
+                app:layout_constraintTop_toTopOf="@id/tv_kebaya"
+                app:layout_constraintStart_toEndOf="@id/tv_kebaya"
+                />
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:id="@+id/tv_coat"
+                android:drawableTop="@drawable/coat"
+                android:layout_marginStart="22dp"
+                android:text="Coat"
+                android:textAlignment="center"
+                app:layout_constraintTop_toTopOf="@id/tv_vest"
+                app:layout_constraintStart_toEndOf="@id/tv_vest"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:id="@+id/lon_dress"
+                android:drawableTop="@drawable/long_dress"
+                android:text="Long dress"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="-4dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_jackect"
+                app:layout_constraintStart_toStartOf="@id/tv_jackect"
+                />
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:id="@+id/tv_uniform"
+                android:text="Uniform"
+                android:drawableTop="@drawable/uniform"
+                app:layout_constraintTop_toTopOf="@id/lon_dress"
+                app:layout_constraintStart_toStartOf="@id/tv_shirt"
+                />
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:text="Short Dress"
+                android:id="@+id/tv_short"
+                android:textAlignment="center"
+                android:drawableTop="@drawable/short_dress"
+                app:layout_constraintTop_toTopOf="@id/tv_uniform"
+                app:layout_constraintStart_toStartOf="@id/tv_kebaya"
+                />
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:id="@+id/tv_blouse"
+                android:text="Blouse"
+                android:textAlignment="center"
+                android:drawableTop="@drawable/blouse"
+                app:layout_constraintTop_toTopOf="@id/tv_short"
+                app:layout_constraintStart_toStartOf="@id/tv_vest"
+                />
+            <TextView
+                android:layout_width="53dp"
+                android:layout_height="55dp"
+                android:id="@+id/tv_sweater"
+                android:drawableTop="@drawable/sweaters"
+                android:text="Sweater"
+                app:layout_constraintTop_toTopOf="@id/tv_blouse"
+                app:layout_constraintStart_toStartOf="@id/tv_coat"
+                />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </HorizontalScrollView>
 
     <View
         android:id="@+id/vline"
         android:layout_width="match_parent"
         android:layout_height="6dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="355dp"
         android:background="#EAE9E9"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rekomendasi Pakaian"
+        android:id="@+id/txt_rekom"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@id/vline"
+        app:layout_constraintStart_toStartOf="@id/txtmau"
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_product"
@@ -101,12 +237,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vline"
+        app:layout_constraintTop_toBottomOf="@+id/txt_rekom"
         tools:listitem="@layout/item_pakaian" />
 <TextView
     android:id="@+id/tvid"
-    android:hint="coba ID "
+    android:hint=" "
     android:textSize="18sp"
     android:textColor="@color/black"
     android:layout_width="match_parent"
@@ -114,5 +252,14 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

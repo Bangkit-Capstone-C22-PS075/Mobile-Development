@@ -19,19 +19,25 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jn.capstoneproject.d_jahit.*
 import com.jn.capstoneproject.d_jahit.Constanta.CAMERA_X_RESULT
 import com.jn.capstoneproject.d_jahit.Constanta.REQUEST_CODE_PERMISSIONS
 import com.jn.capstoneproject.d_jahit.Constanta.REQUIRED_PERMISSIONS
-import com.jn.capstoneproject.d_jahit.SessionManager
-import com.jn.capstoneproject.d_jahit.Utils
-import com.jn.capstoneproject.d_jahit.ViewModelFactory
 import com.jn.capstoneproject.d_jahit.adapter.ListProductAdapter
+import com.jn.capstoneproject.d_jahit.database.history.HistoryDatabase
 import com.jn.capstoneproject.d_jahit.databinding.FragmentHomeBinding
 import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductsItem
 import com.jn.capstoneproject.d_jahit.ui.activity.CameraActivity
 import com.jn.capstoneproject.d_jahit.ui.activity.DetailChat
 import com.jn.capstoneproject.d_jahit.viewmodel.HomeViewModel
 import com.jn.capstoneproject.d_jahit.viewmodel.LoginViewModel
+import io.reactivex.rxjava3.annotations.SchedulerSupport.IO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -40,6 +46,7 @@ import java.io.OutputStream
 
 class HomeFragment : Fragment() {
 
+    private lateinit var navbar: BottomNavigationView
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var sessionManager: SessionManager
@@ -48,6 +55,7 @@ class HomeFragment : Fragment() {
         ViewModelFactory(requireActivity())
     }
     private var currentFile: File? = null
+    val db by lazy { HistoryDatabase(requireActivity()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +81,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+//        navbar.visibility=View.VISIBLE
 
         binding.btnSearch.setOnClickListener {
             startCameraX()
@@ -83,17 +92,22 @@ class HomeFragment : Fragment() {
         if (userId != null) {
 //            binding.tvid.text = token
             binding.tvid.visibility = View.INVISIBLE
-
+        }
             binding.rvProduct.apply {
                 adapter = productAdapter
                 setHasFixedSize(true)
                 layoutManager =
                     LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
             }
-            viewModel.getAllProduct()
+            viewModel.getAllProduct(object : ApiCallbackString{
+                override fun onResponse(success: Boolean, message: String) {
+
+                }
+            })
             viewModel.getProduct.observe(requireActivity()) { listProduct ->
                 showData(listProduct)
             }
+
 
             binding.btnChat.setOnClickListener {
                 val intent = Intent(requireActivity(), DetailChat::class.java)
@@ -108,9 +122,16 @@ class HomeFragment : Fragment() {
                                 story
                             )
                         )
+                        CoroutineScope(Dispatchers.IO).launch {
+                            db.historyDao().insertHistoryProduct(
+                                ProductsItem(0,userId!!,story.name,story.definition,story.productPhoto,
+                                story.price1,story.price2,story.insertedAt)
+                            )
+
+                        }
                     }
                 })
-            }
+
 
 
         }
@@ -165,7 +186,6 @@ class HomeFragment : Fragment() {
             os.close()
 
             currentFile = myFile
-
 
         }
     }

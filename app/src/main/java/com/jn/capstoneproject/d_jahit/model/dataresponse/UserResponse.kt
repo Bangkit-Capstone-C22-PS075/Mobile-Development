@@ -35,7 +35,7 @@ data class UserResponse(
 	val dateOfBirth: String? = null,
 
 	@field:SerializedName("id")
-	val id: String,
+	val id: String? = null,
 
 	@field:SerializedName("email")
 	val email: String? = null,
@@ -45,8 +45,6 @@ data class UserResponse(
 ):Parcelable
 
 data class PutUser(
-	@field:SerializedName("putuserresponse")
-	val putUserResponse : List<UserResponse>,
 
 	@field:SerializedName("message")
 	val message: String,

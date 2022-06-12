@@ -4,9 +4,11 @@ import com.jn.capstoneproject.d_jahit.model.dataresponse.PutUser
 import com.jn.capstoneproject.d_jahit.model.dataresponse.StatusLoginResponse
 import com.jn.capstoneproject.d_jahit.model.dataresponse.StatusResponse
 import com.jn.capstoneproject.d_jahit.model.dataresponse.UserResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
+
 
 interface UserApi {
 
@@ -14,6 +16,7 @@ interface UserApi {
     @POST("user")
     fun addUser(
         @Field("fullName") Name: String,
+        @Field("username") username: String,
         @Field("email") email: String,
         @Field("password") password: String,
     ): Call<StatusResponse>
@@ -34,11 +37,12 @@ interface UserApi {
         @Path("id") id: String,
         @Field("fullName") Name: String,
         @Field("username") username: String,
+        @Field("password") password: String,
         @Field("gender") gender: String,
         @Field("dateOfBirth") dateOfBirth: String,
         @Field("phoneNumber") phoneNumber: String,
         @Field("email") email: String,
-    ): Call<UserResponse>
+    ): Call<PutUser>
 
     @DELETE("user/{id}")
     fun deleteUserById(
@@ -46,10 +50,11 @@ interface UserApi {
         id: String
     ): Call<UserResponse>
 
-    @GET("user/auth/{username}/{password}")
+    @FormUrlEncoded
+    @POST("user/auth")
     fun loginUser(
-        @Path("username") username: String,
-        @Path("password") password: String
+        @Field("email") username: String,
+        @Field("password") password: String
     ): Call<StatusLoginResponse>
 
 }

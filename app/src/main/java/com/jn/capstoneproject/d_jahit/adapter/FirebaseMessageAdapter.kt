@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.jn.capstoneproject.d_jahit.R
 import com.jn.capstoneproject.d_jahit.databinding.ItemMessageBinding
 import com.jn.capstoneproject.d_jahit.model.Message
@@ -15,12 +17,22 @@ class FirebaseMessageAdapter(
     options: FirebaseRecyclerOptions<Message>,
     private val currentUserName: String?
 ) : FirebaseRecyclerAdapter<Message, FirebaseMessageAdapter.MessageViewHolder>(options) {
-
+    var positionChat=0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
+        if (viewType == positionChat) {
+
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_message, parent, false)
+
+        val view = inflater.inflate(R.layout.item_message_right, parent, false)
         val binding = ItemMessageBinding.bind(view)
-        return MessageViewHolder(binding)
+        return MessageViewHolder(binding)}
+        else{
+            val inflater = LayoutInflater.from(parent.context)
+
+            val view = inflater.inflate(R.layout.item_message, parent, false)
+            val binding = ItemMessageBinding.bind(view)
+            return MessageViewHolder(binding)
+        }
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int, model: Message) {
@@ -44,9 +56,12 @@ class FirebaseMessageAdapter(
         private fun setTextColor(userName: String?, textView: TextView) {
             if (currentUserName == userName && userName != null) {
                 textView.setBackgroundResource(R.drawable.rounded_message_blue)
+                positionChat=1
             } else {
                 textView.setBackgroundResource(R.drawable.rounded_message_yellow)
+                positionChat=0
             }
         }
+
     }
 }

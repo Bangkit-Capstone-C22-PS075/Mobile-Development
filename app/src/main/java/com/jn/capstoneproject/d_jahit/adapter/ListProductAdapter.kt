@@ -4,7 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.jn.capstoneproject.d_jahit.DiffCallback
+import com.bumptech.glide.Glide
+import com.jn.capstoneproject.d_jahit.diffcallback.DiffCallback
 import com.jn.capstoneproject.d_jahit.databinding.ItemPakaianBinding
 import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductsItem
 
@@ -23,16 +24,17 @@ class ListProductAdapter: RecyclerView.Adapter<ListProductAdapter.ListViewHolder
         this.onItemClickCallback = onItemClickCallback
     }
 
-
-
     inner class ListViewHolder(private val binding: ItemPakaianBinding):
         RecyclerView.ViewHolder(binding.root){
         fun bind(data: ProductsItem) {
             binding.apply {
                 tvNameProduk.text = data.name
                 tvDescription.text = data.definition
+                Glide.with(itemView)
+                    .load(data.productPhoto)
+                    .into(imgProduct)
             }
-////
+
            itemView.setOnClickListener {
                 onItemClickCallback.onItemClicked(data)
             }
@@ -50,7 +52,13 @@ class ListProductAdapter: RecyclerView.Adapter<ListProductAdapter.ListViewHolder
         holder.bind(listProduct[position])
     }
 
-    override fun getItemCount(): Int = listProduct.size
+    override fun getItemCount(): Int {
+    if(listProduct.size !=null){
+        return listProduct.size
+    }
+        return 10
+    }
+
     interface OnItemClickCallback {
         fun onItemClicked(data: ProductsItem) {
         }

@@ -1,5 +1,6 @@
 package com.jn.capstoneproject.d_jahit
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -27,7 +28,15 @@ class ViewModelFactory constructor(private val context: Context) :
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(Injection.provideUserRepository(context)) as T
             }
-
+            modelClass.isAssignableFrom(SearchViewModel::class.java) -> {
+                SearchViewModel(Injection.provideUserRepository(context)) as T
+            }
+            modelClass.isAssignableFrom(AddProductViewModel::class.java) -> {
+                AddProductViewModel(Injection.provideUserRepository(context)) as T
+            }
+            modelClass.isAssignableFrom(ProductSellerViewModel::class.java) -> {
+                ProductSellerViewModel(Injection.provideUserRepository(context)) as T
+            }
 
             else -> throw IllegalArgumentException("Unkown ViewModel Class ${modelClass.name}")
 

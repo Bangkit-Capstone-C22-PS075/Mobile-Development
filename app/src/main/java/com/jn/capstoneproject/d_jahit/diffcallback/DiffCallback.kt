@@ -1,4 +1,4 @@
-package com.jn.capstoneproject.d_jahit
+package com.jn.capstoneproject.d_jahit.diffcallback
 
 import androidx.recyclerview.widget.DiffUtil
 import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductResponse

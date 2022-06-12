@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.CreateSellerFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:id="@+id/btn_back"
         android:layout_width="38dp"
@@ -34,13 +37,23 @@
         android:background="#F3F3F3"
         android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@id/btn_back"/>
-    <TextView
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:src="@drawable/img_ovl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vline" />
+
+        <TextView
         android:id="@+id/tv_name_store"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama Toko"
        style="@style/createstore"
-        app:layout_constraintTop_toBottomOf="@id/vline"
+        app:layout_constraintTop_toBottomOf="@id/img_upload"
         app:layout_constraintStart_toStartOf="@id/btn_back"
         />
     <EditText
@@ -114,13 +127,32 @@
         android:layout_height="120dp"
         tools:context=".ui.fragment.MapsFragment"
         app:layout_constraintTop_toBottomOf="@id/edt_detail"/>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:id="@+id/img_fullscreen"
+        android:src="@drawable/ic_baseline_fullscreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/map"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Location Selected"
+            android:id="@+id/tv_location"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/map"/>
+
+
     <View
         android:id="@id/vline3"
         android:layout_width="match_parent"
         android:layout_height="14dp"
         android:background="#F3F3F3"
         android:layout_marginTop="14dp"
-        app:layout_constraintTop_toBottomOf="@id/map"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_location"/>
     <TextView
         android:id="@+id/tv_kontak"
         android:layout_width="wrap_content"
@@ -149,7 +181,7 @@
         android:id="@+id/btn_cancel"
         android:layout_width="130dp"
         android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_phone_number"
         android:text="Batal"
         android:textSize="12sp"
         android:layout_margin="30dp"
@@ -161,8 +193,9 @@
         android:layout_height="40dp"
         android:text="Save"
         android:layout_margin="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edt_phone_number"
         app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

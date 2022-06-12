@@ -10,7 +10,9 @@ object Constanta {
     private const val RESOURCE = "GLOBAL"
     const val SUCCESS = "success"
     const val ACCESS_ID = "access_id"
-    const val EXTRA_USER = "extra_user"
+    const val ACCESS_ID_SELLER = "extra_seller"
+    const val ID_IMAGE="id_image"
+    const val EXTRA_USER="extra_user"
 
     @JvmField
     val countingIdlingResource = CountingIdlingResource(RESOURCE)

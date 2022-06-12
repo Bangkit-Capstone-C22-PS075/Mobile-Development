@@ -28,6 +28,7 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
+
     private val viewModel: RegisterViewModel by viewModels {
         ViewModelFactory(requireActivity())
     }
@@ -46,22 +47,24 @@ class RegisterFragment : Fragment() {
         setupViewModel()
         binding.btnRegister.setOnClickListener {
 
-            val email = binding.edtUsername.text.toString()
+            val email = binding.edtEmail.text.toString()
             val password = binding.edtPassword.text.toString()
             val confirmPassword = binding.edtConfirmPassword.text.toString()
             val name = binding.edtName.text.toString()
+            val username= binding.edtUsername.text.toString()
             if (email.isEmpty() && password.isEmpty() && confirmPassword.isEmpty()) {
                 showToast("field tidak boleh ada yg kosong")
             } else if (password != confirmPassword) {
                 showToast("Password tidak sama")
             } else {
-                registerUser(name, email, password)
-                viewModel.registerUser(name, email, password, object : ApiCallbackString {
+
+                viewModel.registerUser(name, username, email, password, object : ApiCallbackString {
                     override fun onResponse(success: Boolean, message: String) {
                         onSuccess(success, message)
 
                     }
                 })
+                registerUser(name, email, password)
 
             }
         }
@@ -89,6 +92,7 @@ class RegisterFragment : Fragment() {
                     databaseReference.setValue(hashMap).addOnCompleteListener(requireActivity()){}
 
                     updateUI(user)
+                    showLoading(false)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmailAndPassword:failure", task.exception)
@@ -101,9 +105,8 @@ class RegisterFragment : Fragment() {
     private fun onSuccess(param: Boolean, message: String) {
         if (param) {
             showToast(message)
-            showLoading(false)
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            startActivity(intent)
+
+
         } else {
             showToast(message)
         }

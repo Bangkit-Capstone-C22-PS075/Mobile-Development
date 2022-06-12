@@ -23,8 +23,8 @@
     <string name="content_tab_text">This is Tab %1$d</string>
     <string name="send_success">Berhasil terkirim</string>
     <string name="send_error">Gagal terkirim</string>
-
-
+    <string name="latlon_format" translatable="false">Lat: %1$.2f Lon: %2$.2f</string>
+    <string name="not_getting_permissions.">Not getting permissions.</string>
     <string name="password_less_than_6">Password must at least 6 characters!</string>
 </resources>
 

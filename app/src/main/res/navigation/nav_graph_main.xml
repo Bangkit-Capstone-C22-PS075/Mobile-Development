@@ -25,6 +25,12 @@
         <action
             android:id="@+id/action_profileFragment_to_createStroreFragment"
             app:destination="@id/createStroreFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_productSellerFragment"
+            app:destination="@id/productSellerFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -46,12 +52,26 @@
         android:id="@+id/mapsFragment"
         android:name="com.jn.capstoneproject.d_jahit.ui.fragment.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <argument
+            android:name="action"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/createStroreFragment"
         android:name="com.jn.capstoneproject.d_jahit.ui.fragment.CreateSellerFragment"
         android:label="fragment_create_strore"
-        tools:layout="@layout/fragment_create_seller" />
+        tools:layout="@layout/fragment_create_seller" >
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue=""
+            />
+        <action
+            android:id="@+id/action_createStroreFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailProductFragment"
         android:name="com.jn.capstoneproject.d_jahit.ui.fragment.DetailProductFragment"
@@ -61,5 +81,46 @@
             android:name="data"
             app:argType="com.jn.capstoneproject.d_jahit.model.dataresponse.ProductsItem"
             />
+        <action
+            android:id="@+id/action_detailProductFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.jn.capstoneproject.d_jahit.ui.fragment.AddProductFragment"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" >
+        <argument
+            android:name="data"
+            app:argType="string"
+            />
+        <argument
+            android:name="idproduct"
+            app:argType="string"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/productSellerFragment"
+        android:name="com.jn.capstoneproject.d_jahit.ui.fragment.ProductSellerFragment"
+        android:label="fragment_product_seller"
+        tools:layout="@layout/fragment_product_seller" >
+        <argument
+            android:name="data"
+            app:argType="string"
+            />
+        <argument
+            android:name="name"
+            app:argType="string"
+            />
+        <argument
+            android:name="userId"
+            app:argType="string"
+            />
+        <action
+            android:id="@+id/action_productSellerFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_productSellerFragment_to_createStroreFragment"
+            app:destination="@id/createStroreFragment" />
     </fragment>
 </navigation>

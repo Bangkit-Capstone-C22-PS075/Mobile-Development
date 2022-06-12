@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -35,11 +36,13 @@ class MainActivity : AppCompatActivity() {
 
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView.visibility=View.VISIBLE
+
 //
         val navController = findNavController(R.id.nav_host_fragment)
 //
         val appBarConfiguration = AppBarConfiguration.Builder(
-            R.id.homeFragment, R.id.profileFragment
+            R.id.homeFragment, R.id.profileFragment ,R.id.searcFragment
         ).build()
 
         setupActionBarWithNavController(navController, appBarConfiguration)

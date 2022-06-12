@@ -41,12 +41,13 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sessionManager = SessionManager(requireActivity())
-        val token = sessionManager.fetchAccessId()
-        if (token != null) {
-            val intent= Intent(requireActivity(), MainActivity::class.java)
-            startActivity(intent)
-        }
+//        sessionManager = SessionManager(requireActivity())
+//        val token = sessionManager.fetchAccessId()
+//        if (token != null) {
+//            val intent= Intent(requireActivity(), MainActivity::class.java)
+//            startActivity(intent)
+//        }
+
 
 
         // Initialize Firebase Auth
@@ -82,10 +83,11 @@ class LoginFragment : Fragment() {
                     viewModel.loginUser(email, password, object : ApiCallbackString{
                         override fun onResponse(success: Boolean, message: String) {
                             onSuccess(success,message)
+                            loginWithEmailAndPass(email, password)
                         }
                     })
 
-                    loginWithEmailAndPass(email, password)
+
 
 
                 }
@@ -98,8 +100,8 @@ class LoginFragment : Fragment() {
 
     private fun onSuccess(param: Boolean, message: String) {
         if (param){
-//            val intent=Intent (requireActivity(), MainActivity::class.java)
-//            startActivity(intent)
+            val intent=Intent (requireActivity(), MainActivity::class.java)
+            startActivity(intent)
             Toast.makeText(requireActivity(),message, Toast.LENGTH_SHORT).show()
         }
     }
