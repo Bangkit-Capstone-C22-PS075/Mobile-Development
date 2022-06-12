@@ -10,8 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
 
-    private const val BASE_URL: String = "https://cogent-tempo-351103.et.r.appspot.com/"
-   private const val BS_URL ="http://192.168.86.245:3030/"
+    private const val BASE_URL: String = "BASE_URL"
+   
     private val loggingInterceptor = if (BuildConfig.DEBUG) {
         HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     } else {
