@@ -1,7 +1,7 @@
 # D_Jahit Mobile Apps
 
  Disini kami membuat sebuah aplikasi mobile dengan meenggunakan firebase untuk membuat realtime chat 
- , retrofit untuk melakukan networking dengan api
+ ,dan menggunakan retrofit untuk melakukan networking dengan api
  
 Step 
 1. Membuat dasar design UI mennggunakan figma 
