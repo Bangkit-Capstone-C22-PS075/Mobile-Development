@@ -30,7 +30,6 @@ class LoginFragment : Fragment() {
         ViewModelFactory(requireActivity())
     }
     private lateinit var sessionManager: SessionManager
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,16 +40,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        sessionManager = SessionManager(requireActivity())
-//        val token = sessionManager.fetchAccessId()
-//        if (token != null) {
-//            val intent= Intent(requireActivity(), MainActivity::class.java)
-//            startActivity(intent)
-//        }
-
-
-
-        // Initialize Firebase Auth
+        sessionManager= SessionManager(requireContext())
         auth = Firebase.auth
 
         binding.apply {
@@ -87,15 +77,9 @@ class LoginFragment : Fragment() {
                         }
                     })
 
-
-
-
                 }
             }
         }
-
-
-
     }
 
     private fun onSuccess(param: Boolean, message: String) {

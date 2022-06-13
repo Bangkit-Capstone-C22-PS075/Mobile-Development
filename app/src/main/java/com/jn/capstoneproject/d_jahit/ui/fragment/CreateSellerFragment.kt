@@ -229,7 +229,7 @@ class CreateSellerFragment : Fragment() {
                                     onSuccess(success, message)
                                 }
                             })
-                    Toast.makeText(requireActivity(),"data Berhasil di update",Toast.LENGTH_SHORT).show()
+
 
 
                 }
@@ -253,22 +253,14 @@ class CreateSellerFragment : Fragment() {
                 val myFile = Utils.uriToFile(selectedImg, requireActivity())
                 binding.imgUpload.setImageURI(selectedImg)
                 getFile=myFile
-                var image: Bitmap? = null
-                try {
-                    image = MediaStore.Images.Media.getBitmap(
-                        requireActivity().getContentResolver(),
-                        selectedImg
-                    )
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
+
 
             }
         }
 
     private fun onSuccess(param: Boolean, message: String) {
         if (param){
-            Toast.makeText(requireActivity(),"Create Toko$message", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(),"Create Toko $message", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
         }
         else{

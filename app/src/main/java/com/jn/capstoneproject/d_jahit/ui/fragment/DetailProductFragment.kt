@@ -2,6 +2,7 @@ package com.jn.capstoneproject.d_jahit.ui.fragment
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ import com.jn.capstoneproject.d_jahit.adapter.ListProductAdapter
 import com.jn.capstoneproject.d_jahit.adapter.ListProducthorizontalAdapter
 import com.jn.capstoneproject.d_jahit.databinding.FragmentDetailProductBinding
 import com.jn.capstoneproject.d_jahit.model.dataresponse.ProductsItem
+import com.jn.capstoneproject.d_jahit.ui.activity.DetailChat
 import com.jn.capstoneproject.d_jahit.viewmodel.HomeViewModel
 
 
@@ -89,25 +91,13 @@ class DetailProductFragment : Fragment() {
             navbar.visibility=View.VISIBLE
         }
         binding.btnPesan.setOnClickListener {
-            showAlerDialog()
+            val intent= Intent (requireActivity(), DetailChat::class.java)
+            startActivity(intent)
         }
 
     }
 
-    private fun showAlerDialog() {
-        val builder= AlertDialog.Builder(requireActivity())
-        val  inflater= layoutInflater
-        val dialogLayout =inflater.inflate(R.layout.pop_transaksi,null)
-        val name=dialogLayout.findViewById<TextView>(R.id.tv_name)
-        with(builder){
-            setPositiveButton("Ok"){dialog, wich ->
 
-            }
-            setNegativeButton("cancel"){ dialogInterface: DialogInterface, i: Int -> }
-            setView(dialogLayout)
-            show()
-        }
-    }
 
     private fun showData(data: List<ProductsItem>) {
 

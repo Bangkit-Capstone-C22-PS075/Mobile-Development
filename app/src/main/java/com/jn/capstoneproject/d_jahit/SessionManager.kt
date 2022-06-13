@@ -11,8 +11,6 @@ class SessionManager(context: Context) {
     private var prefs: SharedPreferences =
         context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
 
-
-
     fun saveAccessId(id: String) {
         val editor = prefs.edit()
         editor.putString(ACCESS_ID, id)
@@ -29,18 +27,6 @@ class SessionManager(context: Context) {
             .apply()
     }
 
-    fun saveAccessIdSelle(id: String){
-        val editor = prefs.edit()
-        editor.putString(ACCESS_ID_SELLER, id)
-    }
-    fun getAccesIdSeller():String?{
-        return prefs.getString(ACCESS_ID_SELLER,null)
-    }
-    fun deleteAccesIdSeller(){
-        val editor=prefs.edit()
-        editor.clear()
-            .apply()
-    }
 
 
 }

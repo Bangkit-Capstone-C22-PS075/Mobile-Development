@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.maps.model.LatLng
 import com.jn.capstoneproject.d_jahit.ApiCallbackString
 import com.jn.capstoneproject.d_jahit.Constanta
+import com.jn.capstoneproject.d_jahit.ResponseLogin
 import com.jn.capstoneproject.d_jahit.SessionManager
 import com.jn.capstoneproject.d_jahit.api.ApiConfig
 import com.jn.capstoneproject.d_jahit.model.dataresponse.*
@@ -50,13 +51,16 @@ class Repository(
                 response: Response<StatusResponse>
             ) {
                 _isLoading.value = false
+                val responseBody = response.body()
                 if (response.isSuccessful) {
-                    val responseBody = response.body()
+                    responseBody?.data?.let{
 
-                    responseBody?.data?.let {
                         session.saveAccessId(it.userId)
                     }
-                    callback.onResponse(response.body() != null, Constanta.SUCCESS)
+
+
+                        callback.onResponse(response.body() != null, Constanta.SUCCESS)
+
                 } else {
                     Log.e(TAG, "onFailure1: ${response.message()}")
 
@@ -113,15 +117,12 @@ class Repository(
                 response: Response<StatusLoginResponse>
             ) {
                 _isLoading.value = false
-                val responseBody = response.body()
+                val responseBody = response.body()?.loginResult
                 if (response.isSuccessful) {
-                    responseBody?.loginResult?.let {
-                        if (it.id != null)
-                            session.saveAccessId(it.id)
-
-                    }
+                        if (responseBody !=null){
+                            session.saveAccessId(responseBody)
+                        }
                     callback.onResponse(response.body() != null, Constanta.SUCCESS)
-
                 } else {
                     Log.e(TAG, "onFailure1: ${response.message()}")
                 }
@@ -186,11 +187,6 @@ class Repository(
                 ) {
                     _isLoading.value = false
                     if (response.isSuccessful) {
-                        val responseBody = response.body()
-
-                        responseBody?.data?.let {
-                            session.saveAccessIdSelle(it.sellerId)
-                        }
                         callback.onResponse(response.body() != null, Constanta.SUCCESS)
                     } else {
                         Log.e(TAG, "onFailure1: ${response.message()}")

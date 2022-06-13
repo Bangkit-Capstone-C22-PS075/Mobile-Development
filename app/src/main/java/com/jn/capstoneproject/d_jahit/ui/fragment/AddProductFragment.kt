@@ -75,46 +75,47 @@ class AddProductFragment : Fragment() {
             val category = result
             val sellerId = args.data
             val produkid=args.idproduct
-            if (produkid.isEmpty()){
-                if (getFile != null) {
-                    val definatio = binding.edtDeskripsi.text.toString()
-                    val price1 = binding.edtPrice1.text.toString()
-                    val price2 = binding.edtPrice2.text.toString()
-                    val dprice = price1.toDouble()
-                    val dprice2 = price2.toDouble()
-                    var bodyname = name.toRequestBody()
-                    val bodyseller = sellerId.toRequestBody()
-                    val bodycategory = category.toRequestBody()
-                    val bodydefination = definatio.toRequestBody()
+        if (getFile != null) {
+            val definatio = binding.edtDeskripsi.text.toString()
+            val price1 = binding.edtPrice1.text.toString()
+            val price2 = binding.edtPrice2.text.toString()
+            val dprice = price1.toDouble()
+            val dprice2 = price2.toDouble()
+            var bodyname = name.toRequestBody()
+            val bodyseller = sellerId.toRequestBody()
+            val bodycategory = category.toRequestBody()
+            val bodydefination = definatio.toRequestBody()
 
-                    val file = Utils.reduceFileImage(getFile as File)
-                    val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                    val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                        "productPhoto",
-                        file.name,
-                        requestImageFile
-                    )
-                    viewModel.addProduct(
-                        bodyseller,
-                        imageMultipart,
-                        bodyname,
-                        bodycategory,
-                        bodydefination,
-                        dprice,
-                        dprice2,
-                        object : ApiCallbackString {
-                            override fun onResponse(success: Boolean, message: String) {
-                                onSucces(success, message)
-                            }
-                        })
-                }
-                else{
-                    Toast.makeText(requireActivity(),"Gambar Wajib dimasukan", Toast.LENGTH_SHORT).show()
-                }
+            val file = Utils.reduceFileImage(getFile as File)
+            val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                "productPhoto",
+                file.name,
+                requestImageFile
+            )
+            viewModel.addProduct(
+                bodyseller,
+                imageMultipart,
+                bodyname,
+                bodycategory,
+                bodydefination,
+                dprice,
+                dprice2,
+                object : ApiCallbackString {
+                    override fun onResponse(success: Boolean, message: String) {
+                        onSucces(success, message)
+                    }
+                })
+        }
+        else{
+            Toast.makeText(requireActivity(),"Gambar Wajib dimasukan", Toast.LENGTH_SHORT).show()
+        }
+            if (produkid.isEmpty()){
+
 
             }
             else {
-                Toast.makeText(requireActivity(),"idProduk tidak ada", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireActivity(),"idProduk tidak ada", Toast.LENGTH_SHORT).show()
                 updateProduct()
         }
 

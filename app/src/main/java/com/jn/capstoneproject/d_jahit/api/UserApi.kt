@@ -1,5 +1,6 @@
 package com.jn.capstoneproject.d_jahit.api
 
+import com.jn.capstoneproject.d_jahit.ResponseLogin
 import com.jn.capstoneproject.d_jahit.model.dataresponse.PutUser
 import com.jn.capstoneproject.d_jahit.model.dataresponse.StatusLoginResponse
 import com.jn.capstoneproject.d_jahit.model.dataresponse.StatusResponse

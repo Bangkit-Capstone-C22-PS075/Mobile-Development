@@ -39,7 +39,8 @@ class FirebaseMessageAdapter(
         holder.bind(model)
     }
 
-    inner class MessageViewHolder(private val binding: ItemMessageBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MessageViewHolder(private val binding: ItemMessageBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Message) {
             binding.tvMessage.text = item.text
             setTextColor(item.name, binding.tvMessage)

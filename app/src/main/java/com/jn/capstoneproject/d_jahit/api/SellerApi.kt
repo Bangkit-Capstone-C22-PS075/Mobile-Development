@@ -29,11 +29,13 @@ interface SellerApi {
         id: String
     ): Call<SellerResponse>
 
-    @GET("seller/{id}")
+    @GET("seller/user-id/{id}")
     fun getSellerById(
         @Path("id")
         id: String
     ): Call<SellersItem>
+
+
 
     @Multipart
     @PUT("seller/{id}")

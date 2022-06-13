@@ -46,7 +46,6 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private lateinit var sessionManager: SessionManager
-    private lateinit var sessionImageManager: SessionImageManager
 
     private lateinit var navbar: BottomNavigationView
     private var getFile: File? = null
@@ -69,7 +68,6 @@ class ProfileFragment : Fragment() {
         navbar=requireActivity().findViewById(R.id.nav_view)
         navbar.visibility=View.VISIBLE
         sessionManager= SessionManager(requireActivity())
-        sessionImageManager= SessionImageManager(requireActivity())
         val id= sessionManager.fetchAccessId()
         if (id !=null){
 
@@ -99,7 +97,6 @@ class ProfileFragment : Fragment() {
         }
         binding.imgProfile.setOnClickListener {
             startGallery()
-
         }
 
         binding.tvCreateStore.setOnClickListener {
@@ -202,10 +199,6 @@ class ProfileFragment : Fragment() {
                   if (response.isSuccessful){
                       Toast.makeText(requireActivity(),response.body()?.status,Toast.LENGTH_SHORT).show()
                       val responseBody = response.body()
-
-                      responseBody?.images?.let {
-                          sessionImageManager.saveImageId(it.id)
-                      }
 
                   }else{
                       Toast.makeText(requireActivity(),response.message(),Toast.LENGTH_SHORT).show()
