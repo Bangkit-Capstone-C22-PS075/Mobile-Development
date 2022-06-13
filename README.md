@@ -1,16 +1,16 @@
 # D_Jahit Mobile Apps
-
- Disini kami membuat sebuah aplikasi mobile dengan meenggunakan firebase untuk membuat realtime chat 
- ,dan menggunakan retrofit untuk melakukan networking dengan api
  
-Step 
-1. Membuat dasar design UI mennggunakan figma 
-2. Mengimplementasikan design yang telah di buat di figma ke android studio
-3. Mengkoneksikan aplikasi dengan firebase
-4. Membuat loginwithemail dengan firebase
-5. Membuat fitur chat
-6. Mengintergrasikan aplikasi dengan google cloud platfom
-7. Memgintegrasikan android dengan model tensorflow lite 
-9. melalakukan Testing
+Here we create a mobile application with Android Studio that utilizing Firebase to create a realtime chat, and Retrofit to manage the networking with API
+ 
+Steps:
+1. Create base UI design using Figma
+2. Implementing the UI design to Android Studio
+3. Connecting the application with Firebase
+4. Create login with email features using Firebase
+5. Create the chat features
+6. Integrating the mobile application with Google Cloud Platform
+7. Integrating the mobile applicatoin with TensorFlow Lite for the Machine Learning
+8. Testing the final application
 
-link design figma https://www.figma.com/file/avZ9iaIHM1PIazhnlVeLNY/Aplikasi-D-jahit?node-id=0%3A1
+link design figma:
+https://www.figma.com/file/avZ9iaIHM1PIazhnlVeLNY/Aplikasi-D-jahit?node-id=0%3A1
